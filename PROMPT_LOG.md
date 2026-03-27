@@ -23,7 +23,7 @@ HTTP-клиент должен быть общим, не создаваться 
 
 ### Итого
 - Количество промптов: 3
-- Что исправлял вручную: добавил test_proxy_item_zero,добавил проверку None в get_client(),добавил test_proxy_calculate_negative_numbers,добавил unit-тест на Pydantic валидацию,настроил pytest-asyncio для асинхронных тестов.
+- Что исправлял вручную: добавил test_proxy_item_zero, добавил проверку None в get_client(), добавил test_proxy_calculate_negative_numbers, добавил unit-тест на Pydantic валидацию
 - Время: ~25 мин
 
 ---
