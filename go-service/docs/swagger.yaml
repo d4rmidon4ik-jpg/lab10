@@ -1,0 +1,124 @@
+basePath: /
+definitions:
+  main.CalculateRequest:
+    properties:
+      a:
+        type: number
+      b:
+        type: number
+      op:
+        enum:
+        - add
+        - sub
+        - mul
+        - div
+        type: string
+    required:
+    - a
+    - b
+    - op
+    type: object
+  main.CalculateResponse:
+    properties:
+      op:
+        type: string
+      result:
+        type: number
+    type: object
+  main.ErrorResponse:
+    properties:
+      error:
+        type: string
+    type: object
+  main.ItemResponse:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  main.PingResponse:
+    properties:
+      message:
+        type: string
+      status:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: Gin-based API for lab10
+  title: Go Service API
+  version: "1.0"
+paths:
+  /calculate:
+    post:
+      consumes:
+      - application/json
+      description: Performs add, sub, mul or div on two numbers
+      parameters:
+      - description: Input
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/main.CalculateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.CalculateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/main.ErrorResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/main.ErrorResponse'
+      summary: Calculate
+      tags:
+      - math
+  /items/{id}:
+    get:
+      description: Returns item by integer ID
+      parameters:
+      - description: Item ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.ItemResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/main.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/main.ErrorResponse'
+      summary: Get item by ID
+      tags:
+      - items
+  /ping:
+    get:
+      description: Returns pong
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.PingResponse'
+      summary: Health check
+      tags:
+      - health
+swagger: "2.0"
