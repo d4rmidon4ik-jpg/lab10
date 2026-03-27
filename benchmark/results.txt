@@ -1,6 +1,47 @@
 ========================================
 Benchmark: Gin (Go) vs FastAPI (Python)
-Date: (fill after running)
+Date: Sat Mar 28 00:37:10 RTZ 2026
 Duration: 10s | Concurrency: 50
 ========================================
-Run ./benchmark/run_benchmark.sh to populate this file.
+
+--- Go Gin: GET /ping ---
+URL: http://localhost:8080/ping
+Complete requests:      35287
+Failed requests:        0
+Requests per second:    3528.65 [#/sec] (mean)
+Time per request:       14.170 [ms] (mean)
+Time per request:       0.283 [ms] (mean, across all concurrent requests)
+Transfer rate:          534.50 [Kbytes/sec] received
+
+--- FastAPI: GET /go/ping ---
+URL: http://localhost:8000/go/ping
+Complete requests:      2430
+Failed requests:        0
+Requests per second:    242.93 [#/sec] (mean)
+Time per request:       205.817 [ms] (mean)
+Time per request:       4.116 [ms] (mean, across all concurrent requests)
+Transfer rate:          37.27 [Kbytes/sec] received
+
+--- Go Gin: POST /calculate ---
+URL: http://localhost:8080/calculate
+Complete requests:      36329
+Failed requests:        0
+Requests per second:    3630.67 [#/sec] (mean)
+Time per request:       13.772 [ms] (mean)
+Time per request:       0.275 [ms] (mean, across all concurrent requests)
+Transfer rate:          521.54 [Kbytes/sec] received
+
+--- FastAPI: POST /go/calculate ---
+URL: http://localhost:8000/go/calculate
+Complete requests:      2391
+Failed requests:        0
+Requests per second:    239.08 [#/sec] (mean)
+Time per request:       209.137 [ms] (mean)
+Time per request:       4.183 [ms] (mean, across all concurrent requests)
+Transfer rate:          34.81 [Kbytes/sec] received
+
+========================================
+Benchmark completed!
+Key metric: Requests per second (higher is better)
+Time per request (mean): lower is better
+========================================
