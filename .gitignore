@@ -16,6 +16,3 @@ go-service/docs/
 target/
 *.so
 *.dylib
-
-# Бенчмарки
-benchmark/results/

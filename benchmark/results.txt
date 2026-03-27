@@ -1,0 +1,6 @@
+========================================
+Benchmark: Gin (Go) vs FastAPI (Python)
+Date: (fill after running)
+Duration: 10s | Concurrency: 50
+========================================
+Run ./benchmark/run_benchmark.sh to populate this file.
