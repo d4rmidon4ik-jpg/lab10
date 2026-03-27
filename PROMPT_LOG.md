@@ -16,9 +16,14 @@ HTTP-клиент должен быть общим, не создаваться 
 Покрой happy path, деление на ноль, отсутствующие поля, отрицательные id."
 **Результат:** Получил MockTransport. Пришлось вручную добавить тест на нулевой id (был только -1).
 
+### Промпт 3
+**Инструмент:** Claude
+**Промпт:** "Перепиши тесты на интеграционные — без моков, с реальным вызовом Go-сервиса. Используй TestClient с lifespan. Покрой все эндпоинты: /health, /go/ping, /go/calculate (add, sub, mul, div, division by zero, invalid op, missing fields, negative numbers), /go/items/:id (valid, not found, zero). Добавь unit-тест на Pydantic валидацию."
+**Результат:** Получил интеграционные тесты с TestClient и фикстурой client.Пришлось вручную добавить:проверку на отрицательные числа в calculate,тест test_proxy_item_zero (изначально был только test_proxy_item_not_found с -1),уточнить что invalid_op и missing_fields возвращают 422 (Pydantic валидация), а не 400,добавить unit-тест test_calculate_request_model_rejects_invalid_op
+
 ### Итого
-- Количество промптов: 2
-- Что исправлял вручную: добавил test_proxy_item_zero, уточнил сообщение ошибки 502
+- Количество промптов: 3
+- Что исправлял вручную: добавил test_proxy_item_zero,добавил проверку None в get_client(),добавил test_proxy_calculate_negative_numbers,добавил unit-тест на Pydantic валидацию,настроил pytest-asyncio для асинхронных тестов.
 - Время: ~25 мин
 
 ---
