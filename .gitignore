@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+.pytest_cache/
+.env
+
+# Go
+*.exe
+*.test
+vendor/
+go-service/docs/
+
+# Rust (на будущее)
+target/
+*.so
+*.dylib
+
+# Бенчмарки
+benchmark/results/
