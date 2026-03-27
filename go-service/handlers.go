@@ -15,9 +15,9 @@ type PingResponse struct {
 
 // CalculateRequest описывает тело запроса /calculate
 type CalculateRequest struct {
-	A  float64 `json:"a"  binding:"required"`
-	B  float64 `json:"b"  binding:"required"`
-	Op string  `json:"op" binding:"required,oneof=add sub mul div"`
+	A  float64  `json:"a"  binding:"required"`
+	B  *float64 `json:"b"  binding:"required"`
+	Op string   `json:"op" binding:"required,oneof=add sub mul div"`
 }
 
 // CalculateResponse описывает ответ /calculate
@@ -66,22 +66,23 @@ func calculateHandler(c *gin.Context) {
 		return
 	}
 
+	b := *req.B  // разыменовываем указатель
+
 	var result float64
 	switch req.Op {
 	case "add":
-		result = req.A + req.B
+		result = req.A + b
 	case "sub":
-		result = req.A - req.B
+		result = req.A - b
 	case "mul":
-		result = req.A * req.B
+		result = req.A * b
 	case "div":
-		if req.B == 0 {
+		if b == 0 {
 			c.JSON(http.StatusUnprocessableEntity, ErrorResponse{Error: "division by zero"})
 			return
 		}
-		result = req.A / req.B
+		result = req.A / b
 	}
-
 	c.JSON(http.StatusOK, CalculateResponse{Result: result, Op: req.Op})
 }
 
